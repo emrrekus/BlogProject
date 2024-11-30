@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+
+@await Component.InvokeAsync("_MainNewsLetterComponentPartial")
+@await Component.InvokeAsync("_MainBlogsComponentPartial")
