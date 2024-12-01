@@ -1,0 +1,67 @@
+﻿@model NewsLetter
+
+<div class="col-lg-4 col-md-12">
+    <div class="newsletter-widget text-center align-self-center">
+        <h3>Bugün Abone Olun!</h3>
+        <p>Haftalık Bültenimize abone olun ve güncellemeleri e-posta yoluyla alın.</p>
+        <form id="newsletterForm" class="form-inline">
+            <input type="email" id="email" asp-for="Mail" placeholder="Mail Adresinizi Giriniz..." class="form-control" />
+            <button type="button" id="subscribeButton" class="btn btn-default btn-block">Abone Ol</button>
+        </form>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#subscribeButton').on('click', function (e) {
+            e.preventDefault();
+
+          
+            const email = $('#email').val();
+
+             if (!email || !email.includes('@@')) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Hata',
+            text: 'Lütfen geçerli bir e-posta adresi giriniz!'
+        });
+        return;
+    }
+
+
+           
+            $.ajax({
+                url: '/NewsLetter/Subscribe',
+                type: 'POST',
+                data: { Mail: email },
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Başarılı',
+                            text: response.message
+                        });
+                        $('#email').val(''); 
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Hata',
+                        text: 'Bir sorun oluştu. Lütfen tekrar deneyin.'
+                    });
+                }
+            });
+        });
+    });
+</script>
