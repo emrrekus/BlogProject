@@ -8,12 +8,24 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="marketing-index.html">Ana Sayfa</a>
+                        <a class="nav-link" href="#">Ana Sayfa</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="marketing-contact.html">Bloglar</a>
+                        <a class="nav-link" href="#">Bloglar</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Register/Index">Üye Ol</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Login/Index">Giriş Yap</a>
+                    </li>
+                    @if (User.IsInRole("Writer"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Yazar Giriş Paneli</a>
+                        </li>
+                    }
                 </ul>
                 <form class="form-inline">
                     <input class="form-control mr-sm-2" type="text" placeholder="Hangi bloğu arıyorsun?">
