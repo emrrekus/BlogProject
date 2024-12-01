@@ -17,6 +17,8 @@ namespace EntityLayer.Concrete
         public string LinkUrl { get; set; }
         public bool Status { get; set; }
 
+      
+
         public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
     }

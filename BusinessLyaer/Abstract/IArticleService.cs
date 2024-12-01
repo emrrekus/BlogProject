@@ -9,5 +9,7 @@ namespace BusinessLyaer.Abstract
 {
     public interface IArticleService : IGenericService<Article>
     {
+
+        List<Article> TArticleListWithCategoryAndAppUser();
     }
 }

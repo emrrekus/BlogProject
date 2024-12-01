@@ -18,6 +18,11 @@ namespace BusinessLyaer.Concrete
             _articleDal = articleDal;
         }
 
+        public List<Article> TArticleListWithCategoryAndAppUser()
+        {
+           return _articleDal.ArticleListWithCategoryAndAppUser();
+        }
+
         public void TDelete(int id)
         {
             _articleDal.Delete(id);
