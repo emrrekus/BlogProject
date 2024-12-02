@@ -12,8 +12,14 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfCommentDal : GenericRepository<Comment>, ICommentDal
     {
+        private BlogContext _blogContext;
         public EfCommentDal(BlogContext blogContext) : base(blogContext)
         {
+            _blogContext = blogContext;
         }
+
+      
+
+       
     }
 }

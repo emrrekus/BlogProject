@@ -46,5 +46,16 @@ namespace DataAccessLayer.EntityFramework
             values.ArticleViewCount++;
             _blogContext.SaveChanges();
         }
+
+        public async Task<List<Comment>> CommentListWithArticleId(int id)
+        {
+            var comments = await _blogContext.Comments
+                .Where(c => c.ArticleId == id)
+                .Include(z => z.AppUser)
+                .OrderByDescending(c => c.CreatedDate)
+                .ToListAsync();
+
+            return comments;
+        }
     }
 }

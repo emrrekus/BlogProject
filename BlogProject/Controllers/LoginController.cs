@@ -26,7 +26,7 @@ namespace BlogProject.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Category");
+                return RedirectToAction("ArticleList", "Article");
             }
             else
             {

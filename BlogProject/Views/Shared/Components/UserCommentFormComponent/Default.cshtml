@@ -1,0 +1,31 @@
+﻿@model CommentViewModel
+
+<div class="custombox clearfix">
+    <h4 class="small-title">Yorum</h4>
+    <div class="row">
+        <div class="col-lg-12">
+            @if (User.Identity.IsAuthenticated)
+            {               
+
+                <form class="form-wrapper">
+                    <input type="text" class="form-control mb-3" placeholder="Adınız" value="@Model.Username" readonly>
+                    <input type="text" class="form-control mb-3" placeholder="E-posta adresiniz" value="@Model.Email" readonly>
+                    <textarea class="form-control mb-3" placeholder="Yorumunuz" rows="5"></textarea>
+                    <button type="submit" class="btn btn-primary w-100">Yorum Gönder</button>
+                </form>
+            }
+            else
+            {
+
+                <div class="alert alert-warning text-center" role="alert">
+                    <h5>Yorum yapabilmek için giriş yapmanız gerekiyor.</h5>
+                    <a href="/Login/Index" class="btn btn-primary mt-2">Giriş Yap</a>
+                    <a href="/Register/Index" class="btn btn-secondary mt-2">Kayıt Ol</a>
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+ 

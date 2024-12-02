@@ -1,0 +1,30 @@
+﻿@using BlogProject.Container
+
+
+<div class="custombox clearfix">
+    <h4 class="small-title">Comments</h4>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="comments-list">
+
+                @foreach (var item in Model)
+                {
+                    <div class="media">
+                        <a class="media-left" href="#">
+                            <img src="@item.AppUser.ImageUrl" alt="" class="rounded-circle">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading user_name">
+                                @item.AppUser.UserName
+                                <small>@DateHelper.GetTimeAgo(item.CreatedDate)</small>
+                            </h4>
+                            <p>@item.CommentDetail</p>
+                            <a href="#" class="btn btn-primary btn-sm">Reply</a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

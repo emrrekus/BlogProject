@@ -35,6 +35,11 @@ namespace BusinessLyaer.Concrete
             _articleDal.ArticleViewCountIncrease(id);
         }
 
+        public Task<List<Comment>> TCommentListWithArticleId(int id)
+        {
+            return _articleDal.CommentListWithArticleId(id);
+        }
+
         public void TDelete(int id)
         {
             _articleDal.Delete(id);
