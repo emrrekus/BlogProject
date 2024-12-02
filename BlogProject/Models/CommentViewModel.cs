@@ -6,7 +6,7 @@ namespace BlogProject.Models
     {
         public int UserId { get; set; }
 
-        public Article Article { get; set; }
+   
         public int ArticleId { get; set; }
         public string Username {  get; set; }
         public string Email { get; set; }

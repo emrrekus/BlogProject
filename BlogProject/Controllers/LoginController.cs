@@ -34,5 +34,11 @@ namespace BlogProject.Controllers
             }
         }
 
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("ArticleList", "Default");
+        }
+
     }
 }

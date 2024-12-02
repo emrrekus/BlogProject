@@ -25,7 +25,7 @@ namespace BlogProject.Controllers
 
             var model = new CommentViewModel
             {
-                Article = commentViewModel.Article,
+              
                 UserId = commentViewModel.UserId,
                 Username = commentViewModel.Username,
                 Email = commentViewModel.Email,
@@ -40,7 +40,7 @@ namespace BlogProject.Controllers
         [HttpPost]
         public JsonResult PartialAddComment(Comment comment)
         {
-            var value = _articleService.TArticleListWithCategoryAndAppUserByArticleId(comment.ArticleId);
+            
             try
             {
                 comment.Article = _articleService.TArticleListWithCategoryAndAppUserByArticleId(comment.ArticleId);
@@ -50,7 +50,7 @@ namespace BlogProject.Controllers
 
                 _commentService.TInsert(comment);
                 return Json(new { success = true, message = "Yorum başarıyla eklendi!" });
-            }
+                           }
             catch (Exception ex)
             {
                 return Json(new { success = false, message = "Yorum eklenirken bir hata oluştu: " + ex.Message });

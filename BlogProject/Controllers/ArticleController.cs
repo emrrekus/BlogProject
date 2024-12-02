@@ -32,7 +32,7 @@ namespace BlogProject.Controllers
 
             var commentViewModel = new CommentViewModel
             {
-                Article = value,
+             
                 ArticleId = id,
                 Username = user?.UserName,
                 Email = user?.Email,
