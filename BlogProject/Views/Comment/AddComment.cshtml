@@ -1,0 +1,64 @@
+﻿@model CommentViewModel
+
+<div class="custombox clearfix">
+    <h4 class="small-title">Yorum</h4>
+    <div class="row">
+        <div class="col-lg-12">
+            @if (User.Identity.IsAuthenticated)
+            {
+
+                <form id="commentForm" class="form-wrapper" method="post">
+                    <input type="text" class="form-control mb-3" placeholder="Adınız" value="@Model.Username" readonly>
+                    <input type="text" class="form-control mb-3" placeholder="E-posta adresiniz" value="@Model.Email" readonly>
+                    <textarea id="commentDetail" class="form-control mb-3" name="CommentDetail" placeholder="Yorumunuzu yazın" rows="5"></textarea>
+                    <input type="hidden" id="articleId" name="AppUserId" value="@Model.UserId" />
+                    <input type="hidden" id="userId" name="ArticleId" value="@Model.ArticleId" />
+                    <button type="submit" id="commentButton" class="btn btn-primary w-100 submit">Yorum Gönder</button>
+                </form>
+            }
+            else
+            {
+
+                <div class="alert alert-warning text-center" role="alert">
+                    <h5>Yorum yapabilmek için giriş yapmanız gerekiyor.</h5>
+                    <a href="/Login/Index" class="btn btn-primary mt-2">Giriş Yap</a>
+                    <a href="/Register/Index" class="btn btn-secondary mt-2">Kayıt Ol</a>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#commentButton").on('click', function (e) {
+                e.preventDefault();
+
+                var formData = {
+                    AppUserId: $("input[name='AppUserId']").val(),
+                    ArticleId: $("input[name='ArticleId']").val(),
+                    CommentDetail: $("textarea[name='CommentDetail']").val()
+                };
+
+                $.ajax({
+                    url: "/Comment/PartialAddComment",
+                    type: "POST",
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            $("#responseMessage").html('<p style="color: green;">' + response.message + '</p>');
+                            $("#commentForm")[0].reset();
+                        } else {
+                            $("#responseMessage").html('<p style="color: red;">' + response.message + '</p>');
+                        }
+                    },
+                    error: function () {
+                        $("#responseMessage").html('<p style="color: red;">Bir hata oluştu. Lütfen tekrar deneyiniz.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+

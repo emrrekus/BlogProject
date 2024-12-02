@@ -86,7 +86,9 @@
 
                             <hr class="invis1">
 
-                            @await Component.InvokeAsync("UserCommentFormComponent")
+                            @await Html.PartialAsync("~/Views/Comment/AddComment.cshtml", ViewData["CommentViewModel"] as CommentViewModel)
+
+                          @*   @await Component.InvokeAsync("UserCommentFormComponent", new { id = Model.ArticleId }) *@
 
                             </div>
                         </div><!-- end page-wrapper -->

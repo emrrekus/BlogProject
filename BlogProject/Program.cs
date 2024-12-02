@@ -2,12 +2,13 @@ using BlogProject.Models;
 using BusinessLyaer.Container;
 using DataAccessLayer.Context;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<BlogContext>();
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BlogContext>().AddErrorDescriber<CustomIdentityErrorValidator>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BlogContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityErrorValidator>();
 
 
 builder.Services.AddServices();

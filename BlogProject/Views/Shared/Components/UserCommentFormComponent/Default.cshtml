@@ -5,13 +5,15 @@
     <div class="row">
         <div class="col-lg-12">
             @if (User.Identity.IsAuthenticated)
-            {               
+            {
 
-                <form class="form-wrapper">
-                    <input type="text" class="form-control mb-3" placeholder="Adınız" value="@Model.Username" readonly>
-                    <input type="text" class="form-control mb-3" placeholder="E-posta adresiniz" value="@Model.Email" readonly>
-                    <textarea class="form-control mb-3" placeholder="Yorumunuz" rows="5"></textarea>
-                    <button type="submit" class="btn btn-primary w-100">Yorum Gönder</button>
+                <form id="commentForm" class="form-wrapper" method="post">
+                    <input type="text" class="form-control mb-3"  placeholder="Adınız" value="@Model.Username" readonly>
+                    <input type="text" class="form-control mb-3"  placeholder="E-posta adresiniz" value="@Model.Email" readonly>
+                    <textarea id="commentDetail" class="form-control mb-3" name="Content" placeholder="Yorumunuzu yazın" rows="5"></textarea>
+                    <input type="hidden" id="articleId" name="AppUserId" value="@Model.ArticleId" />
+                      <input type="hidden" id="userId" name="ArticleId" value="@Model.UserId" />
+                    <button type="submit" class="btn btn-primary w-100 submit">Yorum Gönder</button>
                 </form>
             }
             else
@@ -27,5 +29,35 @@
     </div>
 
 
+    <script>
 
- 
+       $(document).ready(function () {
+        $("#commentForm").on("submit", function (e) {
+            e.preventDefault();
+
+            var formData = {
+                AppUserId: $("input[name='AppUserId']").val(),
+                ArticleId: $("input[name='ArticleId']").val(),
+                Content: $("textarea[name='Content']").val()
+            };
+
+            $.ajax({
+              url: "@Url.Action("PartialAddComment", "Comment")",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        $("#responseMessage").html('<p style="color: green;">' + response.message + '</p>');
+                        $("#commentForm")[0].reset();
+                    } else {
+                        $("#responseMessage").html('<p style="color: red;">' + response.message + '</p>');
+                    }
+                },
+                error: function () {
+                    $("#responseMessage").html('<p style="color: red;">Bir hata oluştu. Lütfen tekrar deneyiniz.</p>');
+                }
+            });
+        });
+    });
+    </script>
+
