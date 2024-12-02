@@ -7,12 +7,11 @@
 
     <div id="wrapper">
 
-
+       
 
         @await Component.InvokeAsync("_MainHeaderComponentPartial")
-        @await Component.InvokeAsync("_MostPopularBlogComponentPartial")
 
-
+    
         @RenderBody()
 
 
@@ -22,11 +21,12 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                         @await Component.InvokeAsync("_MainRecentPostComponentPartial")
                     </div><!-- end col -->
+                  
                     @await Component.InvokeAsync("_MainPopularPostsComponentPartial")
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                         @await Component.InvokeAsync("_MainPopularCategoriesComponentPartial")
                     </div>
-
+                
                 </div><!-- end row -->
 
                 <div class="row">
@@ -42,6 +42,8 @@
         <div class="dmtop">Scroll to Top</div>
 
     </div><!-- end wrapper -->
+  
+ 
     @await Component.InvokeAsync("_MainScriptsComponentPartial")
 
 </body>

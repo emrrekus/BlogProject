@@ -17,6 +17,7 @@
     <Folder Include="Areas\Writer\Models\" />
     <Folder Include="Areas\Writer\Views\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\userimage\" />
   </ItemGroup>
 
   <ItemGroup>

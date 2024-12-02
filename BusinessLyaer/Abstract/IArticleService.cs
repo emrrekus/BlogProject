@@ -11,5 +11,7 @@ namespace BusinessLyaer.Abstract
     {
 
         List<Article> TArticleListWithCategoryAndAppUser();
+        Article TArticleListWithCategoryAndAppUserByArticleId(int id);
+        void TArticleViewCountIncrease(int id);
     }
 }

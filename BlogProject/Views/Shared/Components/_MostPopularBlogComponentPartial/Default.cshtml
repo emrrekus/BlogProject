@@ -1,0 +1,17 @@
+﻿
+
+<section id="cta" class="section" style="  background: rgba(0, 0, 0, 0) url(@Model.MainImageUrl) no-repeat scroll center center / cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 align-self-center">
+                <h2>@Model.Title</h2>
+                <p class="lead"> @Model.Detail</p>
+                <a href="/Article/ArticleDetail/@Model.ArticleId" class="btn btn-primary">Yazıyı Oku</a>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                @await Html.PartialAsync("~/Views/NewsLetter/AddNewsLetter.cshtml")
+            </div>
+
+        </div>
+    </div>
+</section>

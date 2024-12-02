@@ -10,5 +10,8 @@ namespace DataAccessLayer.Abstract
     public interface IArticleDal : IGenericDal<Article>
     {
         List<Article> ArticleListWithCategoryAndAppUser();
+        Article ArticleListWithCategoryAndAppUserByArticleId(int id);
+
+        void ArticleViewCountIncrease(int id);
     }
 }

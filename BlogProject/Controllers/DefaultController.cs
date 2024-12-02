@@ -16,6 +16,8 @@ namespace BlogProject.Controllers
             
         }
 
+
+
         public IActionResult ArticleList(int page =1)
         {
 

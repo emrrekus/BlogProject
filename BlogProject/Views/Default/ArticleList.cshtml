@@ -7,6 +7,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+
 <section class="section lb">
     <div class="container">
         <div class="row">
@@ -17,8 +18,8 @@
                         {
                             <div class="blog-box wow fadeIn">
                                 <div class="post-media">
-                                    <a href="#" title="">
-                                        <img src="@item.MainImageUrl" alt="" class="img-fluid">
+                                    <a href="/Article/ArticleDetail/@item.ArticleId" title="">
+                                        <img src="@item.MainImageUrl" alt="" class="img-fluid" >
                                         <div class="hovereffect">
                                             <span></span>
                                         </div>
@@ -28,8 +29,8 @@
                                 <!-- end media -->
                                 <div class="blog-meta big-meta text-center">
 
-                                    <h4><a href="#" title="">@item.Title</a></h4>
-                                    <p>@item.Detail.Substring(0, @item.Detail.Substring(0, 150).LastIndexOf(" ")) <a href="#">Devamını oku...</a></p>
+                                    <h4><a href="/Article/ArticleDetail/@item.ArticleId" title="">@item.Title</a></h4>
+                                    <p>@item.Detail.Substring(0, @item.Detail.Substring(0, 150).LastIndexOf(" ")) <a href="/Article/ArticleDetail/@item.ArticleId">Devamını oku...</a></p>
                                     <small><a href="marketing-category.html" title="">@item.Category.CategoryName</a></small>
                                     <small><a href="marketing-single.html" title="">@item.CreatedDate.ToString("mm-dd-yyyy")</a></small>
                                     <small><a href="#" title="">@item.AppUser.Name @item.AppUser.Surname</a></small>
