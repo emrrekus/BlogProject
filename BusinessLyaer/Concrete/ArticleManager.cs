@@ -18,6 +18,11 @@ namespace BusinessLyaer.Concrete
             _articleDal = articleDal;
         }
 
+        public  Task<Article> ArticleListWithCategoryAndAppUserByArticleIdAsync(int id)
+        {
+            return _articleDal.ArticleListWithCategoryAndAppUserByArticleIdAsync(id);
+        }
+
         public List<Article> TArticleListWithCategoryAndAppUser()
         {
            return _articleDal.ArticleListWithCategoryAndAppUser();
@@ -30,9 +35,9 @@ namespace BusinessLyaer.Concrete
             return _articleDal.ArticleListWithCategoryAndAppUserByArticleId(id);
         }
 
-        public void TArticleViewCountIncrease(int id)
+        public  Task TArticleViewCountIncreaseAsync(int id)
         {
-            _articleDal.ArticleViewCountIncrease(id);
+            return  _articleDal.ArticleViewCountIncreaseAsync(id);
         }
 
         public Task<List<Comment>> TCommentListWithArticleId(int id)

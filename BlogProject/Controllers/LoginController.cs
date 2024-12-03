@@ -1,7 +1,11 @@
 ﻿using BlogProject.Models;
+using BusinessLyaer.ValidationRules.LoginValidationRules;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
+using ViewSharedLayer.ViewModels;
 
 namespace BlogProject.Controllers
 {
@@ -22,16 +26,33 @@ namespace BlogProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, true);
+            ModelState.Clear();
+           LoginValidationRules loginValidationRules = new LoginValidationRules();
+            ValidationResult validResult = loginValidationRules.Validate(model);
 
-            if (result.Succeeded)
+            if(validResult.IsValid)
             {
-                return RedirectToAction("ArticleList", "Default");
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, true);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ArticleList", "Default");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
+                foreach (var item in validResult.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
                 return View();
             }
+
+            
         }
 
         public async Task<IActionResult> LogOut()

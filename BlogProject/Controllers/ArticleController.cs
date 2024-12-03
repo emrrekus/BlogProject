@@ -25,21 +25,24 @@ namespace BlogProject.Controllers
         public async Task<IActionResult> ArticleDetail(int id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-           
-            _articleService.TArticleViewCountIncrease(id);
 
-            var value = _articleService.TArticleListWithCategoryAndAppUserByArticleId(id);
+             await _articleService.TArticleViewCountIncreaseAsync(id);
+
+            var value = await _articleService.ArticleListWithCategoryAndAppUserByArticleIdAsync(id);
+
+
 
             var commentViewModel = new CommentViewModel
             {
-             
+
                 ArticleId = id,
                 Username = user?.UserName,
                 Email = user?.Email,
-                UserId = user.Id
+                UserId = user?.Id
             };
 
             ViewData["CommentViewModel"] = commentViewModel;
+           
             return View(value);
         }
     }

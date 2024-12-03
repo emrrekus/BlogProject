@@ -40,11 +40,28 @@ namespace DataAccessLayer.EntityFramework
             return values;
         }
 
-        public void ArticleViewCountIncrease(int id)
+        public async Task<Article> ArticleListWithCategoryAndAppUserByArticleIdAsync(int id)
         {
-            var values = _blogContext.Articles.Find(id);
-            values.ArticleViewCount++;
-            _blogContext.SaveChanges();
+            var values = await _blogContext.Articles
+      .Where(x => x.ArticleId == id)
+      .Include(x => x.Category)
+      .Include(x => x.AppUser)
+      .Include(x => x.Tags)
+          .ThenInclude(t => t.TagCloud)
+      .FirstOrDefaultAsync();
+
+            return  values;
+
+        }
+
+        public async Task ArticleViewCountIncreaseAsync(int id)
+        {
+            var values = await _blogContext.Articles.FindAsync(id);
+            if (values != null) // Null kontrolü yaparak hata riskini azaltırız
+            {
+                values.ArticleViewCount++;
+                await _blogContext.SaveChangesAsync();
+            }
         }
 
         public async Task<List<Comment>> CommentListWithArticleId(int id)

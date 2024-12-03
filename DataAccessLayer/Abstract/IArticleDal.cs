@@ -11,8 +11,8 @@ namespace DataAccessLayer.Abstract
     {
         List<Article> ArticleListWithCategoryAndAppUser();
         Article ArticleListWithCategoryAndAppUserByArticleId(int id);
-
-        void ArticleViewCountIncrease(int id);
+        Task<Article> ArticleListWithCategoryAndAppUserByArticleIdAsync(int id);
+        Task ArticleViewCountIncreaseAsync(int id);
 
        Task<List<Comment>>  CommentListWithArticleId(int id);
     }

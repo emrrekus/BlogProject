@@ -113,10 +113,14 @@
             <h2>Giriş Yap</h2>
             <form method="post">
                 <input type="text" asp-for="Username" class="form-control" placeholder="Username" >
+                <span class="text-danger" asp-validation-for="Username" class="text-danger"></span>
                 <input type="password" asp-for="Password" class="form-control" placeholder="Şifreniz">
+                <span class="text-danger" asp-validation-for="Password" class="text-danger"></span>
               
                 <button  class="btn btn-primary">Giriş Yap</button>
             </form>
+
+            
         </div>
     </div>
 

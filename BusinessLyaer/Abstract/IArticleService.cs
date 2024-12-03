@@ -12,7 +12,8 @@ namespace BusinessLyaer.Abstract
 
         List<Article> TArticleListWithCategoryAndAppUser();
         Article TArticleListWithCategoryAndAppUserByArticleId(int id);
-        void TArticleViewCountIncrease(int id);
+        Task<Article> ArticleListWithCategoryAndAppUserByArticleIdAsync(int id);
+        Task TArticleViewCountIncreaseAsync(int id);
 
         Task<List<Comment>> TCommentListWithArticleId(int id);
     }

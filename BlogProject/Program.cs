@@ -2,6 +2,7 @@ using BlogProject.Models;
 using BusinessLyaer.Container;
 using DataAccessLayer.Context;
 using EntityLayer.Concrete;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,7 @@ builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<BlogCo
 builder.Services.AddServices();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddFluentValidation();
 
 var app = builder.Build();
 
