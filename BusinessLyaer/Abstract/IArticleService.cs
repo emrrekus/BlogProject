@@ -9,12 +9,14 @@ namespace BusinessLyaer.Abstract
 {
     public interface IArticleService : IGenericService<Article>
     {
-
+        Task<List<Article>> TArticleListWithCategoryAndAppUserbyUserIdAsync(int id);
         List<Article> TArticleListWithCategoryAndAppUser();
         Article TArticleListWithCategoryAndAppUserByArticleId(int id);
-        Task<Article> ArticleListWithCategoryAndAppUserByArticleIdAsync(int id);
+        Task<Article> TArticleListWithCategoryAndAppUserByArticleIdAsync(int id);
         Task TArticleViewCountIncreaseAsync(int id);
 
         Task<List<Comment>> TCommentListWithArticleId(int id);
+
+       
     }
 }

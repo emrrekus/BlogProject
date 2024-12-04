@@ -18,7 +18,7 @@ namespace BusinessLyaer.Concrete
             _articleDal = articleDal;
         }
 
-        public  Task<Article> ArticleListWithCategoryAndAppUserByArticleIdAsync(int id)
+        public  Task<Article> TArticleListWithCategoryAndAppUserByArticleIdAsync(int id)
         {
             return _articleDal.ArticleListWithCategoryAndAppUserByArticleIdAsync(id);
         }
@@ -68,6 +68,11 @@ namespace BusinessLyaer.Concrete
         public void TUpdate(Article entity)
         {
             _articleDal.Update(entity);
+        }
+
+        public Task<List<Article>> TArticleListWithCategoryAndAppUserbyUserIdAsync(int id)
+        {
+            return _articleDal.ArticleListWithCategoryAndAppUserbyUserIdAsync(id);
         }
     }
 }

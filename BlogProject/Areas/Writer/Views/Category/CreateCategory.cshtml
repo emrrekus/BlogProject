@@ -1,0 +1,47 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header text-white text-center" style="background-color: #007bff;">
+            <h2 class="fw-semibold mb-0">Kategori Ekle</h2>
+        </div>
+       
+        <div class="card-body">
+            <form method="post">
+            
+
+                <!-- Kategori Adı -->
+                <div class="mb-3">
+                    <label  class="form-label fw-bold">Kategori Adı</label>
+                    <input type="text" asp-for="CategoryName" class="form-control shadow-sm" placeholder="Kategori adını giriniz..." />
+                   <span class="text-danger" asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+
+                <!-- Butonlar -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                        <i class="bi bi-check-circle"></i> Güncelle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+﻿@model Article
+@{
+    ViewData["Title"] = "EditArticle";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header text-black text-center" style="background: linear-gradient(90deg, #6a11cb, #2575fc);">
+            <h2 class="fw-bold mb-1">Blog Güncelle</h2>
+
+        </div>
+
+        <div class="card-body">
+            <form asp-action="EditArticle" method="post">
+
+                <input type="hidden" asp-for="ArticleId" />
+
+
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-bold">Başlık</label>
+                    <input type="text" asp-for="Title" class="form-control shadow-sm" placeholder="Başlık giriniz..." />
+                    <br />
+                    <label asp-for="CategoryId" class="form-label fw-bold">Kategori Adı</label>
+                    <select asp-for="CategoryId" class="form-control shadow-sm" asp-items="ViewBag.v1"></select>
+                    <br />
+                    <label asp-for="Title" class="form-label fw-bold">Başlık</label>
+                    <input type="text" asp-for="Title" class="form-control shadow-sm" placeholder="Başlık giriniz..." />
+                    <br />
+                    <label asp-for="Detail" class="form-label fw-bold">Detay</label>
+                    <input type="text" asp-for="Detail" class="form-control shadow-sm" placeholder="Detay giriniz..." />
+                    <br />
+                    <label asp-for="CoverImageUrl" class="form-label fw-bold">Mini Resim</label>
+                    <input type="text" asp-for="CoverImageUrl" class="form-control shadow-sm" placeholder="Mini Resim..." />
+                    <br />
+                    <label asp-for="MainImageUrl" class="form-label fw-bold">Detay</label>
+                    <input type="text" asp-for="MainImageUrl" class="form-control shadow-sm" placeholder="Ana Resim.." />
+                    <br />
+
+                    <input type="hidden" asp-for="AppUserId" class="form-control shadow-sm" placeholder="Ana Resim.." readonly/>
+                    <br />
+                    <input type="hidden" asp-for="CreatedDate" class="form-control shadow-sm" placeholder="Ana Resim.." readonly />
+                    <br />
+                    <input type="hidden" asp-for="ArticleViewCount" class="form-control shadow-sm" placeholder="Ana Resim.." readonly />
+                    <br />
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg shadow-sm">
+                        <i class="bi bi-check-circle"></i> Güncelle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+

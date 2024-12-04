@@ -10,6 +10,8 @@ namespace DataAccessLayer.Abstract
     public interface IArticleDal : IGenericDal<Article>
     {
         List<Article> ArticleListWithCategoryAndAppUser();
+        
+        Task<List<Article>> ArticleListWithCategoryAndAppUserbyUserIdAsync(int id);
         Article ArticleListWithCategoryAndAppUserByArticleId(int id);
         Task<Article> ArticleListWithCategoryAndAppUserByArticleIdAsync(int id);
         Task ArticleViewCountIncreaseAsync(int id);

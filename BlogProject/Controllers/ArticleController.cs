@@ -28,7 +28,7 @@ namespace BlogProject.Controllers
 
              await _articleService.TArticleViewCountIncreaseAsync(id);
 
-            var value = await _articleService.ArticleListWithCategoryAndAppUserByArticleIdAsync(id);
+            var value = await _articleService.TArticleListWithCategoryAndAppUserByArticleIdAsync(id);
 
 
 

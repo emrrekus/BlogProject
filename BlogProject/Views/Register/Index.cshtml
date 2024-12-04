@@ -114,22 +114,20 @@
         <div class="welcome-section">
             <h1>Merhabalar!</h1>
             <p>Markedia Hoş Geldin. Hesabın varsa hesabına girmek için üye girişi yapabilirsin.</p>
-            <button><a href="Register/Index" style="text-decoration: none; color: inherit;">Giriş Yap</a></button>
+            <button><a href="/Login/Index" style="text-decoration: none; color: inherit;">Giriş Yap</a></button>
         </div>
         <div class="login-form">
             <h2>Üye Ol</h2>
+
             <form method="post">
                 <input type="text" asp-for="Name" class="form-control" placeholder="Adınız">
                 <input type="text" asp-for="Surname" class="form-control" placeholder="Soyadınız">
-                <input type="email" asp-for="Email" class="form-control" placeholder="Mail Adresiniz">
+                <input type="text" asp-for="Email" class="form-control" placeholder="Mail Adresiniz">
                 <input type="text" asp-for="UserName" class="form-control" placeholder="Kullanıcı Adınız">
-                <input type="password" asp-for="Password" class="form-control" placeholder="Şifreniz" required>
-
+                <input type="password" asp-for="Password" class="form-control" placeholder="Şifreniz">
                 <button class="btn btn-primary">Kayıt Ol</button>
-
-                <div class="text-primary" asp-validation-summary="ModelOnly">
-                </div>
             </form>
+            <div asp-validation-summary="All" class="text-danger"></div>
         </div>
     </div>
 

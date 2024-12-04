@@ -27,6 +27,18 @@ namespace DataAccessLayer.EntityFramework
         .ToList();
         }
 
+        public Task<List<Article>> ArticleListWithCategoryAndAppUserbyUserIdAsync(int id)
+        {
+           return _blogContext.Articles
+                .Where(x=> x.AppUserId == id)
+                .Include(x=> x.Category)
+                .Include(x=> x.AppUser)
+                .ToListAsync(); 
+        }
+
+
+     
+
         public Article ArticleListWithCategoryAndAppUserByArticleId(int id)
         {
             var values = _blogContext.Articles
@@ -53,6 +65,8 @@ namespace DataAccessLayer.EntityFramework
             return  values;
 
         }
+
+       
 
         public async Task ArticleViewCountIncreaseAsync(int id)
         {

@@ -1,0 +1,75 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Article>
+@{
+    ViewData["Title"] = "ArticleList";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+
+
+<br />
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Blog Listesi</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="color:black">Blog Id</th>
+                                <th style="color:black">Başlık</th>
+                                <th style="color:black">Detay</th>
+                                <th style="color:black">Kategori</th>
+                                <th style="color:black">Tarih</th>
+                                <th style="color:black">Görüntülenme</th>
+                                <th style="color:black">Sil</th>
+                                <th style="color:black">Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var article in Model)
+                            {
+                                <tr>
+                                    <td style="color:black">@article.ArticleId</td>
+                                    <td style="color:black">@article.Title</td>
+                                    <td style="color:black">@article.Detail</td>
+                                    <td style="color:black">@article.Category.CategoryName</td>
+                                    <td style="color:black">@article.CreatedDate.ToString("mm-dd-yyyy")</td>
+                                    <td style="color:black">@article.ArticleViewCount</td>
+                                    <td><a href="/Writer/Article/DeleteArticle/@article.ArticleId" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Writer/Article/EditArticle/@article.ArticleId" class="btn btn-outline-warning">Güncelle</a></td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                    <a href="/Writer/Article/CreateArticle" class="btn btn-outline-primary">Yeni Kategori Girişi</a>
+                </div>
+            </div>
+            @Html.PagedListPager(
+                     (IPagedList)Model,
+                     page => Url.Action("ArticleList", "Article", new { page }),
+                     new PagedListRenderOptions
+            {
+                DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                LinkToPreviousPageFormat = "«",
+                LinkToNextPageFormat = "»",
+                MaximumPageNumbersToDisplay = 3,
+                UlElementClasses = new[] { "pagination", "justify-content-center" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" }
+            }
+                     )
+        </div>
+
+    </div>
+</div>

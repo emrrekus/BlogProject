@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
-    <Folder Include="Areas\Writer\Controllers\" />
+    <Compile Remove="wwwroot\focus-2\**" />
+    <Content Remove="wwwroot\focus-2\**" />
+    <EmbeddedResource Remove="wwwroot\focus-2\**" />
+    <None Remove="wwwroot\focus-2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Areas\Writer\Data\" />
     <Folder Include="Areas\Writer\Models\" />
-    <Folder Include="Areas\Writer\Views\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\focus\" />
     <Folder Include="wwwroot\userimage\" />
   </ItemGroup>
 
