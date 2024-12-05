@@ -1,0 +1,65 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<TagCloud>
+@{
+    ViewData["Title"] = "TagList";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<br />
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Etiket Listesi</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="color:black">Tag Id</th>
+                                <th style="color:black">Etiket Adı</th>
+                                <th style="color:black">Sil</th>
+                                <th style="color:black">Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tag in Model)
+                            {
+                                <tr>
+                                    <td style="color:black">@tag.TagCloudId</td>
+                                    <td style="color:black">@tag.Title</td>
+                                    <td><a href="/Writer/Tag/DeleteTag/@tag.TagCloudId" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Writer/Tag/EditTag/@tag.TagCloudId" class="btn btn-outline-warning">Güncelle</a></td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                    <a href="/Writer/Tag/CreateTag" class="btn btn-outline-primary">Yeni Etiket Girişi</a>
+                </div>
+            </div>
+        </div>
+        @Html.PagedListPager(
+                 (IPagedList)Model,
+                 page => Url.Action("TagList", "Tag", new { page }),
+                 new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+            DisplayLinkToLastPage = PagedListDisplayMode.Never,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+            LinkToPreviousPageFormat = "«",
+            LinkToNextPageFormat = "»",
+            MaximumPageNumbersToDisplay = 3,
+            UlElementClasses = new[] { "pagination", "justify-content-center" },
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" }
+        }
+                 )
+    </div>
+</div>
+

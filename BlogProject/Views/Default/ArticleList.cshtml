@@ -30,7 +30,12 @@
                                 <div class="blog-meta big-meta text-center">
 
                                     <h4><a href="/Article/ArticleDetail/@item.ArticleId" title="">@item.Title</a></h4>
-                                    <p>@item.Detail.Substring(0, @item.Detail.Substring(0, 150).LastIndexOf(" ")) <a href="/Article/ArticleDetail/@item.ArticleId">Devamını oku...</a></p>
+                                    <p>
+                                        @(item.Detail.Length >= 150
+                                            ? item.Detail.Substring(0, item.Detail.Substring(0, 150).LastIndexOf(" ")) + " <a href='/Article/ArticleDetail/" + item.ArticleId + "'>Devamını oku...</a>"
+                                            : item.Detail)
+                                    </p>
+
                                     <small><a href="#" title="">@item.Category.CategoryName</a></small>
                                     <small><a href="#" title="">@item.CreatedDate.ToString("mm-dd-yyyy")</a></small>
                                     <small><a href="#" title="">@item.AppUser.Name @item.AppUser.Surname</a></small>

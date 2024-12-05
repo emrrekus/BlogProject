@@ -90,17 +90,23 @@ namespace BlogProject.Areas.Writer.Controllers
 
                 await _articleService.TCreateArticle(article, user.Id, tagId, CoverImage, MainImage);
 
-                return RedirectToAction("ArticleList"); // Başarılıysa listeye dön
+                return RedirectToAction("ArticleList");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", $"Oluşturma sırasında bir hata oluştu: {ex.Message}");
-                return View(article); // Hata durumunda aynı View'e model ile dön
+                return View(article);
             }
 
 
         }
 
+
+        public IActionResult DeleteArticle(int id)
+        {
+            _articleService.TDelete(id);
+            return RedirectToAction("ArticleList");
+        }
 
 
 

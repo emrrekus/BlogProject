@@ -186,9 +186,9 @@ namespace DataAccessLayer.EntityFramework
             article.AppUserId = UserId;
 
             if (article.Tags == null)
-            {
                 article.Tags = new List<ArticleTag>();
-            }
+
+
 
             if (tagId != null)
             {

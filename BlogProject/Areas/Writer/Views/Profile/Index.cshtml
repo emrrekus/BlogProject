@@ -1,0 +1,123 @@
+﻿@model AppUser
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<style>
+    .profile-header {
+        background-color: #4a90e2;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: 'Arial', sans-serif;
+    }
+
+        .profile-header h2 {
+            margin: 0;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+    .custom-btn-update {
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+        .custom-btn-update:hover {
+            background: linear-gradient(90deg, #2575fc, #6a11cb);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .custom-btn-update:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+</style>
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+
+        <div class="profile-header">
+            <h2>Profilim</h2>
+        </div>
+
+        <div class="card-body">
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label fw-bold">İsim</label>
+                <input type="text" asp-for="Name" class="form-control shadow-sm" readonly />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Surname" class="form-label fw-bold">Soyisim</label>
+                <input type="text" asp-for="Surname" class="form-control shadow-sm" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label fw-bold">Açıklama</label>
+                <input type="text" asp-for="Description" class="form-control shadow-sm" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UserName" class="form-label fw-bold">Kullanıcı Adı</label>
+                <input type="text" asp-for="UserName" class="form-control shadow-sm" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label fw-bold">Email</label>
+                <input type="text" asp-for="Email" class="form-control shadow-sm" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ImageUrl" class="form-label fw-bold">Kullanıcı Resmi</label>
+                <br />
+                <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/default-user.png" : Model.ImageUrl)"
+                     alt="Kullanıcı Resmi"
+                     class="img-thumbnail shadow-sm"
+                     style="width: 150px; height: 150px; object-fit: cover;" />
+
+            </div>
+
+            <div class="text-center">
+                <button type="button" class="custom-btn-update" data-bs-toggle="modal" data-bs-target="#editModal">
+                    <i class="bi bi-pencil-square"></i> Kullanıcı Bilgilerini Güncelle
+                </button>
+
+                <button type="button" class="custom-btn-update" data-bs-toggle="modal" data-bs-target="#passwordModal">
+                    <i class="bi bi-shield-check"></i> Şifre Bilgilerini Güncelle
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Areas/Writer/Views/Profile/PasswordPopup.cshtml")
+@await Html.PartialAsync("/Areas/Writer/Views/Profile/UpdateProfilePopup.cshtml")
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
