@@ -1,6 +1,7 @@
 ﻿using BusinessLyaer.Abstract;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,7 @@ namespace BusinessLyaer.Concrete
             _articleDal = articleDal;
         }
 
-        public  Task<Article> TArticleListWithCategoryAndAppUserByArticleIdAsync(int id)
-        {
-            return _articleDal.ArticleListWithCategoryAndAppUserByArticleIdAsync(id);
-        }
+    
 
         public List<Article> TArticleListWithCategoryAndAppUser()
         {
@@ -73,6 +71,23 @@ namespace BusinessLyaer.Concrete
         public Task<List<Article>> TArticleListWithCategoryAndAppUserbyUserIdAsync(int id)
         {
             return _articleDal.ArticleListWithCategoryAndAppUserbyUserIdAsync(id);
+        }
+
+      
+
+        public Task<Article> TArticleWithCategoryAndAppUserByArticleIdAsync(int id)
+        {
+            return _articleDal.ArticleWithCategoryAndAppUserByArticleIdAsync(id);
+        }
+
+        public Task TUpdateArticleWithTagsAsync(Article article, int[] tagId, IFormFile? CoverImage, IFormFile? MainImage)
+        {
+            return _articleDal.UpdateArticleWithTagsAsync(article,tagId, CoverImage, MainImage);
+        }
+
+        public Task TCreateArticle(Article article, int UserId, int[] tagId, IFormFile CoverImage, IFormFile MainImage)
+        {
+          return _articleDal.CreateArticle(article,UserId,tagId,CoverImage,MainImage);
         }
     }
 }

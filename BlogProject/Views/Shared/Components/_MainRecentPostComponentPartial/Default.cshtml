@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Article>
 
 <div class="widget">
     <h2 class="widget-title">Son Bloglar</h2>
@@ -7,7 +7,7 @@
 
             @foreach (var item in Model)
             {
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="/Article/ArticleDetail/@item.ArticleId" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="w-100 justify-content-between">
                         <img src="@item.CoverImageUrl" alt="" class="img-fluid float-left">
                         <h5 class="mb-1">@item.Title</h5>

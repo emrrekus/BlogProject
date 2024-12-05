@@ -1,8 +1,10 @@
 ﻿@model Article
+
 @{
-    ViewData["Title"] = "EditArticle";
+    ViewData["Title"] = "CreateArticle";
     Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
+
 
 
 <style>
@@ -30,80 +32,60 @@
         }
 </style>
 
-
 <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 <div class="container mt-5">
     <div class="card shadow-lg border-0">
 
         <div class="card-header text-black text-center" style="background: linear-gradient(90deg, #6a11cb, #2575fc);">
-            <h2 class="fw-bold mb-1">Blog Güncelle</h2>
+            <h2 class="fw-bold mb-1">Yeni Blog Ekle</h2>
+
         </div>
 
-
         <div class="card-body">
-            <form asp-action="EditArticle" method="post" enctype="multipart/form-data">
-
-                <input type="hidden" asp-for="ArticleId" />
+            <form method="post" asp-action="CreateArticle" enctype="multipart/form-data">
 
                 <div class="mb-3">
                     <label asp-for="Title" class="form-label fw-bold">Başlık</label>
                     <input type="text" asp-for="Title" class="form-control shadow-sm" placeholder="Başlık giriniz..." />
-                </div>
-
-
-                <div class="mb-3">
+                    <br />
                     <label asp-for="CategoryId" class="form-label fw-bold">Kategori Adı</label>
                     <select asp-for="CategoryId" class="form-control shadow-sm" asp-items="ViewBag.v1"></select>
-                </div>
-
-
-                <div class="mb-3">
+                    <br />
                     <label asp-for="Detail" class="form-label fw-bold">Detay</label>
-                    <textarea asp-for="Detail" class="form-control shadow-sm" placeholder="Detay giriniz..."></textarea>
-                </div>
-
-
-                <div class="mb-3">
+                    <input type="text" asp-for="Detail" class="form-control shadow-sm" placeholder="Detay giriniz..." />
+                    <br />
                     <label class="form-label fw-bold">Mini Resim</label>
                     <input type="file" name="CoverImage" class="form-control shadow-sm" />
-                </div>
-
-
-                <div class="mb-3">
+                    <br />
                     <label class="form-label fw-bold">Detay Resim</label>
                     <input type="file" name="MainImage" class="form-control shadow-sm" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="tags" class="form-label fw-bold">Etiketler</label>
-                    <div class="tag-container">
-                        @foreach (var item in ViewBag.Tags as List<TagCloud>)
-                        {
-                            <div class="tag-item">
-                                <input type="checkbox" name="tagId" value="@item.TagCloudId"
-                                @(Model.Tags.Any(t => t.TagCloudId == item.TagCloudId) ? "checked" : "") />
-                                <label>@item.Title</label>
+                    <br />
+                    <div class="mb-3">
+                        <label for="tags" class="form-label fw-bold">Etiketler</label>
+                        <div class="tag-container">
+                            <div class="tag-container">
+                                @foreach(var item in ViewBag.Tags)
+                                {
+                                    <div class="tag-item"> 
+                                        <input type="checkbox" name="tagId" value="@item.TagCloudId" />
+                                        <label>@item.Title</label>
+                                    </div>
+                                }
                             </div>
-                        }
+
+                        </div>
+                    
                     </div>
-                </div>
-
+                                 
               
-
-
-
-
-                <input type="hidden" asp-for="MainImageUrl" />
-                <input type="hidden" asp-for="CoverImageUrl" />
-                <input type="hidden" asp-for="AppUserId" />
-                <input type="hidden" asp-for="CreatedDate" />
-                <input type="hidden" asp-for="ArticleViewCount" />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
 
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-success btn-lg shadow-sm">
-                        <i class="bi bi-check-circle"></i> Güncelle
+                        <i class="bi bi-check-circle"></i> Blog Oluştur
                     </button>
                 </div>
             </form>

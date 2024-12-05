@@ -2,6 +2,8 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Repositories;
 using EntityLayer.Concrete;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,20 +26,27 @@ namespace DataAccessLayer.EntityFramework
             return _blogContext.Articles
         .Include(x => x.Category)
         .Include(x => x.AppUser)
+
         .ToList();
         }
 
+
+
         public Task<List<Article>> ArticleListWithCategoryAndAppUserbyUserIdAsync(int id)
         {
-           return _blogContext.Articles
-                .Where(x=> x.AppUserId == id)
-                .Include(x=> x.Category)
-                .Include(x=> x.AppUser)
-                .ToListAsync(); 
+            return _blogContext.Articles
+                 .Where(x => x.AppUserId == id)
+                 .Include(x => x.Category)
+                 .Include(x => x.AppUser)
+                 .Include(x => x.Tags)
+                 .ThenInclude(x => x.TagCloud)
+                 .ToListAsync();
+
+
         }
 
 
-     
+
 
         public Article ArticleListWithCategoryAndAppUserByArticleId(int id)
         {
@@ -52,7 +61,7 @@ namespace DataAccessLayer.EntityFramework
             return values;
         }
 
-        public async Task<Article> ArticleListWithCategoryAndAppUserByArticleIdAsync(int id)
+        public async Task<Article> ArticleWithCategoryAndAppUserByArticleIdAsync(int id)
         {
             var values = await _blogContext.Articles
       .Where(x => x.ArticleId == id)
@@ -62,16 +71,16 @@ namespace DataAccessLayer.EntityFramework
           .ThenInclude(t => t.TagCloud)
       .FirstOrDefaultAsync();
 
-            return  values;
+            return values;
 
         }
 
-       
+
 
         public async Task ArticleViewCountIncreaseAsync(int id)
         {
             var values = await _blogContext.Articles.FindAsync(id);
-            if (values != null) // Null kontrolü yaparak hata riskini azaltırız
+            if (values != null)
             {
                 values.ArticleViewCount++;
                 await _blogContext.SaveChangesAsync();
@@ -87,6 +96,120 @@ namespace DataAccessLayer.EntityFramework
                 .ToListAsync();
 
             return comments;
+        }
+
+        public async Task UpdateArticleWithTagsAsync(Article article, int[] tagId, IFormFile? CoverImage, IFormFile? MainImage)
+        {
+
+            var existingArticle = await _blogContext.Articles
+        .Include(a => a.Tags)
+        .FirstOrDefaultAsync(a => a.ArticleId == article.ArticleId);
+
+
+
+
+            if (tagId != null)
+            {
+                existingArticle.Tags.Clear();
+                foreach (var tag in tagId)
+                {
+                    existingArticle.Tags.Add(new ArticleTag
+                    {
+                        ArticleId = article.ArticleId,
+                        TagCloudId = tag
+                    });
+                }
+            }
+
+
+            string uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/userimage");
+            EnsureDirectoryExists(uploadFolder);
+
+            if (CoverImage != null)
+            {
+                existingArticle.CoverImageUrl = await SaveFileAsync(CoverImage, uploadFolder);
+            }
+
+            if (MainImage != null)
+            {
+                existingArticle.MainImageUrl = await SaveFileAsync(MainImage, uploadFolder);
+            }
+
+
+            existingArticle.Title = article.Title;
+            existingArticle.Detail = article.Detail;
+            existingArticle.CategoryId = article.CategoryId;
+
+            await _blogContext.SaveChangesAsync();
+
+        }
+
+        public async Task<string> SaveFileAsync(IFormFile file, string uploadFolder)
+        {
+            if (file != null && file.Length > 0)
+            {
+
+                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+
+                string filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+
+                return "/userimage/" + uniqueFileName;
+            }
+
+            return null;
+        }
+
+        public void EnsureDirectoryExists(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
+
+        public async Task CreateArticle(Article article, int UserId, int[] tagId, IFormFile CoverImage, IFormFile MainImage)
+        {
+            string uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/userimage");
+            EnsureDirectoryExists(uploadFolder);
+            article.CoverImageUrl = await SaveFileAsync(CoverImage, uploadFolder);
+            article.MainImageUrl = await SaveFileAsync(MainImage, uploadFolder);
+            article.CreatedDate = DateTime.Now;
+            article.ArticleViewCount = 0;
+            article.AppUserId = UserId;
+
+            if (article.Tags == null)
+            {
+                article.Tags = new List<ArticleTag>();
+            }
+
+            if (tagId != null)
+            {
+             
+                foreach (var tag in tagId)
+                {
+                    article.Tags.Add(new ArticleTag
+                    {
+                        ArticleId = article.ArticleId,
+                        TagCloudId = tag
+                    });
+                }
+            }
+
+
+            _blogContext.Articles.Add(article);
+            await _blogContext.SaveChangesAsync();
+
+
+
+
         }
     }
 }
