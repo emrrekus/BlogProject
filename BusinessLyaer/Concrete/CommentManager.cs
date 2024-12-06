@@ -18,6 +18,11 @@ namespace BusinessLyaer.Concrete
             _commentDal = commentDal;
         }
 
+        public Task<List<Comment>> TCommentListByUserIdAsync(int id)
+        {
+            return _commentDal.CommentListByUserIdAsync(id);
+        }
+
         public void TDelete(int id)
         {
             _commentDal.Delete(id);

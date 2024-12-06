@@ -2,6 +2,7 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Repositories;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,12 @@ namespace DataAccessLayer.EntityFramework
             _blogContext = blogContext;
         }
 
-      
-
-       
+        public Task<List<Comment>> CommentListByUserIdAsync(int id)
+        {
+           return _blogContext.Comments.Where(x=> x.AppUserId == id)
+                .Include(x => x.Article)
+                .Include(x=> x.AppUser)
+                .ToListAsync();
+        }
     }
 }

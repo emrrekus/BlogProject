@@ -9,5 +9,9 @@ namespace BusinessLyaer.Abstract
 {
     public interface ICommentService : IGenericService<Comment>
     {
+
+        Task<List<Comment>> TCommentListByUserIdAsync(int id);
+
+        
     }
 }

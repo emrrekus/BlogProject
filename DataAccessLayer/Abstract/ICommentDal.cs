@@ -9,9 +9,9 @@ namespace DataAccessLayer.Abstract
 {
     public interface ICommentDal : IGenericDal<Comment>
     {
-     
 
-     
+
+        Task<List<Comment>> CommentListByUserIdAsync(int id);
 
     }
 }

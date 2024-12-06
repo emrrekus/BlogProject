@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="stat-widget-one card-body">
+                <div class="stat-icon d-inline-block">
+                    <i class="ti-star text-success border-success"></i>
+                </div>
+                <div class="stat-content d-inline-block">
+                    <div class="stat-text">En Popüler Blog</div>
+                    <div class="stat-digit">@ViewBag.mostPopulerArticle</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="stat-widget-one card-body">
+                <div class="stat-icon d-inline-block">
+                    <i class="ti-user text-primary border-primary"></i>
+                </div>
+                <div class="stat-content d-inline-block">
+                    <div class="stat-text">En Çok Yazısı Olan Yazar</div>
+                    <div class="stat-digit">@ViewBag.userMostBlogs</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="stat-widget-one card-body">
+                <div class="stat-icon d-inline-block">
+                    <i class="ti-comments text-warning border-warning"></i>
+                </div>
+                <div class="stat-content d-inline-block">
+                    <div class="stat-text">Toplam Yorum Sayısı</div>
+                    <div class="stat-digit">@ViewBag.commentCount</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="stat-widget-one card-body">
+                <div class="stat-icon d-inline-block">
+                    <i class="ti-layout-grid2 text-danger border-danger"></i>
+                </div>
+                <div class="stat-content d-inline-block">
+                    <div class="stat-text">En Popüler Kategori</div>
+                    <div class="stat-digit">@ViewBag.mostPopulerCategory</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="stat-widget-one card-body">
+                <div class="stat-icon d-inline-block">
+                    <i class="ti-bookmark-alt text-info border-info"></i>
+                </div>
+                <div class="stat-content d-inline-block">
+                    <div class="stat-text">Toplam Blog Sayısı</div>
+                    <div class="stat-digit">@ViewBag.articleCount</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="stat-widget-one card-body">
+                <div class="stat-icon d-inline-block">
+                    <i class="ti-email text-secondary border-secondary"></i>
+                </div>
+                <div class="stat-content d-inline-block">
+                    <div class="stat-text">Toplam Haber Bülteni Sayısı</div>
+                    <div class="stat-digit">@ViewBag.newsLetterCount</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="stat-widget-one card-body">
+                <div class="stat-icon d-inline-block">
+                    <i class="ti-tag text-dark border-dark"></i>
+                </div>
+                <div class="stat-content d-inline-block">
+                    <div class="stat-text">En Popüler Tag</div>
+                    <div class="stat-digit">@ViewBag.mostTags</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="stat-widget-one card-body">
+                <div class="stat-icon d-inline-block">
+                    <i class="ti-view-list text-dark border-warning"></i>
+                </div>
+                <div class="stat-content d-inline-block">
+                    <div class="stat-text">Kategori Sayısı</div>
+                    <div class="stat-digit">@ViewBag.coutCategories</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+</div>
+

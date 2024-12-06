@@ -26,8 +26,9 @@ namespace DataAccessLayer.EntityFramework
             return _blogContext.Articles
         .Include(x => x.Category)
         .Include(x => x.AppUser)
-
-        .ToList();
+        .Include(x => x.Tags)
+        .ThenInclude(x => x.TagCloud)
+                .ToList();
         }
 
 
@@ -192,7 +193,7 @@ namespace DataAccessLayer.EntityFramework
 
             if (tagId != null)
             {
-             
+
                 foreach (var tag in tagId)
                 {
                     article.Tags.Add(new ArticleTag
