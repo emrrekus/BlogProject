@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+@await Html.PartialAsync("/Views/Layout/PartialHead.cshtml")
+
+<body>
+
+
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+
+    <div id="main-wrapper">
+
+        @await Html.PartialAsync("/Views/Layout/PartialHeader.cshtml")
+        @await Html.PartialAsync("/Views/Layout/PartialNavbar.cshtml")
+        <div class="content-body">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        @await Html.PartialAsync("/Views/Layout/PartialFooter.cshtml")
+
+    </div>
+
+    @await Html.PartialAsync("/Views/Layout/PartialScript.cshtml")
+
+
+</body>
+
+</html>
+
+

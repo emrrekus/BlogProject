@@ -31,9 +31,17 @@
 
                                     <h4><a href="/Article/ArticleDetail/@item.ArticleId" title="">@item.Title</a></h4>
                                     <p>
-                                        @(item.Detail.Length >= 150
-                                            ? item.Detail.Substring(0, item.Detail.Substring(0, 150).LastIndexOf(" ")) + " <a href='/Article/ArticleDetail/" + item.ArticleId + "'>Devamını oku...</a>"
-                                            : item.Detail)
+                                        @Html.Raw(
+                                                 item.Detail.Length >= 150
+                                                 ? item.Detail.Substring(0,
+                                                 (item.Detail.Substring(0, 150).LastIndexOf(" ") > 0
+                                                 ? item.Detail.Substring(0, 150).LastIndexOf(" ")
+                                                 : 150)
+                                                 ) + " <a href='/Article/ArticleDetail/" + item.ArticleId + "'>Devamını oku...</a>"
+                                                 : item.Detail
+                                                 )
+
+
                                     </p>
 
                                     <small><a href="#" title="">@item.Category.CategoryName</a></small>

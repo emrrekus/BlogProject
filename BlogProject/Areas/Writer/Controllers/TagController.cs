@@ -10,7 +10,7 @@ namespace BlogProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
     [Route("Writer/[controller]/[action]/{id?}")]
-    [Authorize]
+   
     public class TagController : Controller
     {
         private readonly ITagCloudService _tagCloudService;

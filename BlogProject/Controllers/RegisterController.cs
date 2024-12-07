@@ -3,12 +3,14 @@ using BusinessLyaer.ValidationRules.LoginValidationRules;
 using BusinessLyaer.ValidationRules.RegisterValidationRules;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ViewSharedLayer.ViewModels;
 
 namespace BlogProject.Controllers
 {
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
 

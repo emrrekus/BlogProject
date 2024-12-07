@@ -7,7 +7,7 @@ namespace BlogProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
     [Route("Writer/[controller]/[action]/{id?}")]
-    [Authorize]
+  
     public class DashboardController : Controller
     {
         private readonly IArticleService _articleService;
@@ -68,19 +68,19 @@ namespace BlogProject.Areas.Writer.Controllers
 
             var articles = _articleService.TGetAll();
 
-            // Makaleleri kategorilerine göre gruplayıp, her kategorideki makale sayısını alın.
+       
             var categoryGroups = articles
-                .Where(a => a.Category != null) // Kategorisi null olmayanları al
-                .GroupBy(a => a.Category.CategoryName)  // Kategori ismine göre grupla
+                .Where(a => a.Category != null) 
+                .GroupBy(a => a.Category.CategoryName)  
                 .Select(g => new { CategoryName = g.Key, Count = g.Count() })
-                .OrderByDescending(x => x.Count) // En çok makalesi olan kategori en üstte olsun
+                .OrderByDescending(x => x.Count)
                 .ToList();
 
-            // Kategori isimlerini ve makale sayılarını ayrı listeler halinde alalım.
+         
             var categoryNames = categoryGroups.Select(x => x.CategoryName).ToList();
             var categoryCounts = categoryGroups.Select(x => x.Count).ToList();
 
-            // ViewBag aracılığıyla veriyi view'a gönder.
+           
             ViewBag.CategoryNames = categoryNames;
             ViewBag.CategoryCounts = categoryCounts;
 

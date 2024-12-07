@@ -1,10 +1,12 @@
 ﻿using BusinessLyaer.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using X.PagedList.Extensions;
 
 namespace BlogProject.Controllers
 {
+    [AllowAnonymous]
     public class DefaultController : Controller
     {
         private readonly IArticleService _articleService;

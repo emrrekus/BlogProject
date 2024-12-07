@@ -9,7 +9,7 @@ namespace BlogProject.Areas.Writer.Controllers
 
     [Area("Writer")]
     [Route("Writer/[controller]/[action]/{id?}")]
-    [Authorize]
+
     public class ProfileController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

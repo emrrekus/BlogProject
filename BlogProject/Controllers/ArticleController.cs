@@ -1,11 +1,13 @@
 ﻿using BlogProject.Models;
 using BusinessLyaer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogProject.Controllers
 {
+    [AllowAnonymous]
     public class ArticleController : Controller
     {
         private readonly IArticleService _articleService;

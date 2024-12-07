@@ -8,7 +8,7 @@ namespace BlogProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
     [Route("Writer/[controller]/[action]/{id?}")]
-    [Authorize]
+
     public class CommentController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
